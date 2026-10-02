@@ -1,416 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Muhammad Adnan Ameen — Flutter Developer</title>
-<meta name="description" content="Muhammad Adnan Ameen, Flutter developer in Multan, Pakistan. Cross-platform apps, clean architecture, published on the Play Store.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg: #F1EFEA;
-    --surface: #FFFFFF;
-    --ink: #14151B;
-    --muted: #5B5E66;
-    --line: #DCD8CE;
-    --accent: #423CE0;
-    --accent-soft: #E9E7FB;
-    --mono: 'JetBrains Mono', monospace;
-    --max: 1080px;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Inter', sans-serif;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3{
-    font-family:'Space Grotesk', sans-serif;
-    margin:0;
-    letter-spacing:-0.01em;
-  }
-  a{color:inherit;}
-  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
-  ::selection{background:var(--accent-soft); color:var(--accent);}
-
-  /* NAV */
-  header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(241,239,234,0.88);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-  nav.wrap{
-    display:flex; align-items:center; justify-content:space-between;
-    height:64px;
-  }
-  .brand{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:1.05rem;}
-  .brand span{color:var(--accent);}
-  .navlinks{display:flex; gap:28px; font-size:0.92rem;}
-  .navlinks a{text-decoration:none; color:var(--muted); transition:color .15s;}
-  .navlinks a:hover{color:var(--ink);}
-  .nav-cta{
-    border:1px solid var(--ink); border-radius:999px;
-    padding:7px 16px; font-size:0.88rem; text-decoration:none;
-    color:var(--ink); white-space:nowrap;
-  }
-  .nav-cta:hover{background:var(--ink); color:var(--bg);}
-  .menu-btn{display:none; background:none; border:none; cursor:pointer; padding:6px;}
-  .menu-btn span{display:block; width:22px; height:2px; background:var(--ink); margin:5px 0;}
-
-  /* HERO */
-  .hero{padding:96px 0 72px; position:relative; overflow:hidden;}
-  .kicker{
-    font-family:var(--mono); font-size:0.82rem; color:var(--muted);
-    margin-bottom:22px; display:flex; align-items:center; gap:10px;
-  }
-  .kicker .dot{width:7px; height:7px; border-radius:50%; background:#39C46B; display:inline-block;}
-  .hero h1{
-    font-size:clamp(2.3rem, 5.4vw, 4rem);
-    font-weight:600; line-height:1.08; max-width:15ch;
-  }
-  .hero-sub{
-    max-width:56ch; font-size:1.12rem; color:var(--muted); margin-top:26px;
-  }
-  .hero-meta{
-    display:flex; flex-wrap:wrap; gap:10px; margin-top:34px;
-  }
-  .pill{
-    border:1px solid var(--line); background:var(--surface);
-    border-radius:999px; padding:8px 16px; font-size:0.85rem; color:var(--ink);
-  }
-  .hero-actions{margin-top:38px; display:flex; gap:14px; flex-wrap:wrap;}
-  .btn-primary{
-    background:var(--ink); color:var(--bg); text-decoration:none;
-    padding:13px 24px; border-radius:8px; font-size:0.95rem; font-weight:500;
-    display:inline-block;
-  }
-  .btn-secondary{
-    border:1px solid var(--ink); text-decoration:none; color:var(--ink);
-    padding:12px 24px; border-radius:8px; font-size:0.95rem; font-weight:500;
-    display:inline-block;
-  }
-  .hero-graphic{
-    position:absolute; right:-60px; top:60px; opacity:0.9; pointer-events:none;
-  }
-  @media (max-width:860px){.hero-graphic{display:none;}}
-
-  /* SECTION shared */
-  section{padding:76px 0; border-top:1px solid var(--line);}
-  .section-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:44px; gap:20px; flex-wrap:wrap;}
-  .section-head h2{font-size:1.9rem; font-weight:600;}
-  .section-num{font-family:var(--mono); color:var(--muted); font-size:0.85rem;}
-
-  /* PROFILE / ABOUT */
-  .about-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:60px;}
-  @media (max-width:800px){.about-grid{grid-template-columns:1fr;}}
-  .about-grid p{color:var(--muted); font-size:1.02rem; max-width:52ch;}
-  .about-grid p + p{margin-top:16px;}
-  .skill-block h3{font-size:0.95rem; margin-bottom:10px; color:var(--ink);}
-  .skill-block{margin-bottom:24px;}
-  .tag-row{display:flex; flex-wrap:wrap; gap:8px;}
-  .tag{
-    background:var(--surface); border:1px solid var(--line); border-radius:6px;
-    padding:6px 12px; font-size:0.83rem; font-family:var(--mono);
-  }
-
-  /* EXPERIENCE TIMELINE */
-  .timeline{position:relative; padding-left:32px;}
-  .timeline::before{
-    content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:var(--line);
-  }
-  .tl-item{position:relative; padding-bottom:44px;}
-  .tl-item:last-child{padding-bottom:0;}
-  .tl-item::before{
-    content:''; position:absolute; left:-32px; top:5px; width:11px; height:11px;
-    border-radius:50%; background:var(--accent); border:3px solid var(--bg);
-    box-shadow:0 0 0 1px var(--accent);
-  }
-  .tl-date{font-family:var(--mono); font-size:0.82rem; color:var(--accent); margin-bottom:6px;}
-  .tl-role{font-size:1.15rem; font-weight:600; font-family:'Space Grotesk',sans-serif;}
-  .tl-company{color:var(--muted); font-size:0.95rem; margin-bottom:10px;}
-  .tl-item ul{margin:8px 0 0; padding-left:18px; color:var(--muted); font-size:0.95rem;}
-  .tl-item li{margin-bottom:5px;}
-
-  /* PROJECTS */
-  .project-grid{
-    display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:18px;
-  }
-  .project-card{
-    background:var(--surface); border:1px solid var(--line); border-radius:12px;
-    padding:22px; display:flex; flex-direction:column; gap:14px; min-height:210px;
-  }
-  .app-icon{
-    width:44px; height:44px; border-radius:11px; display:flex; align-items:center; justify-content:center;
-    font-family:'Space Grotesk',sans-serif; font-weight:700; color:#fff; font-size:1.05rem;
-  }
-  .project-card h3{font-size:1.05rem;}
-  .project-card p{font-size:0.9rem; color:var(--muted); margin:0; flex-grow:1;}
-  .project-card a{
-    font-size:0.85rem; color:var(--accent); text-decoration:none; font-weight:500; border-top:1px solid var(--line); padding-top:12px;
-  }
-  .project-card a:hover{text-decoration:underline;}
-  .no-link{font-size:0.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:12px;}
-
-  /* EDUCATION */
-  .edu-row{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;}
-  .edu-row h3{font-size:1.2rem;}
-  .edu-row span{font-family:var(--mono); font-size:0.85rem; color:var(--muted);}
-  .edu-sub{color:var(--muted); margin-top:6px;}
-
-  /* CONTACT */
-  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
-  @media (max-width:700px){.contact-grid{grid-template-columns:1fr;}}
-  .contact-grid h2{font-size:2.2rem; max-width:12ch; line-height:1.15;}
-  .contact-list{display:flex; flex-direction:column; gap:16px; margin-top:8px;}
-  .contact-list a{
-    text-decoration:none; color:var(--ink); font-size:1.02rem; display:flex; gap:12px; align-items:center;
-    padding-bottom:14px; border-bottom:1px solid var(--line);
-  }
-  .contact-list a:hover{color:var(--accent);}
-  .contact-list .label{color:var(--muted); font-size:0.82rem; width:90px; flex-shrink:0; font-family:var(--mono);}
-
-  footer{
-    border-top:1px solid var(--line); padding:26px 0; font-size:0.85rem; color:var(--muted);
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
-  }
-
-  @media (max-width:720px){
-    .navlinks{
-      position:fixed; top:64px; left:0; right:0; background:var(--bg);
-      flex-direction:column; padding:20px 28px; border-bottom:1px solid var(--line);
-      transform:translateY(-130%); transition:transform .2s ease; gap:16px;
-    }
-    .navlinks.open{transform:translateY(0);}
-    .menu-btn{display:block;}
-    .nav-cta{display:none;}
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Muhammad Adnan Ameen — Senior Flutter Developer</title>
+  <meta name="description" content="Senior Flutter developer and mobile app engineer in Multan, Pakistan. Flutter, Kotlin, Java, Firebase. Apps published on Google Play and the App Store.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#F5F6F9;--panel:#fff;--ink:#0E2238;--mut:#52617A;--line:#D9DEE8;--acc:#D9680F;--acc2:#1F5C99;--glow:rgba(217,104,15,.14);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+    @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0A1A2C;--panel:#10263D;--ink:#EEF3FA;--mut:#9FB0C6;--line:#1F3853;--acc:#FF9A3D;--acc2:#5AA5E6;--glow:rgba(255,154,61,.16)}}
+    :root[data-theme="dark"]{--bg:#0A1A2C;--panel:#10263D;--ink:#EEF3FA;--mut:#9FB0C6;--line:#1F3853;--acc:#FF9A3D;--acc2:#5AA5E6;--glow:rgba(255,154,61,.16)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
+    body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.6 'DM Sans',system-ui,sans-serif;overflow-x:hidden}
+    h1,h2,h3{font-family:'Bricolage Grotesque','DM Sans',sans-serif;margin:0;letter-spacing:-.02em}
+    a{color:inherit}
+    .w{max-width:1100px;margin:0 auto;padding:0 24px}
+    #bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:3px;width:0;background:var(--acc);z-index:99}
+    header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+    .brand{font:800 1.15rem 'Bricolage Grotesque';text-decoration:none}.brand i{color:var(--acc);font-style:normal}
+    .links{display:flex;gap:22px;font-size:.92rem}.links a{text-decoration:none;color:var(--mut)}.links a:hover{color:var(--ink)}
+    .tools{display:flex;gap:10px;align-items:center}
+    button{font:inherit;cursor:pointer;color:var(--ink)}
+    .ib{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--panel)}
+    .menu{display:none}
+    .btn{display:inline-block;padding:13px 24px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--acc);color:#111;transition:transform .2s,box-shadow .2s}
+    .btn:hover{transform:translateY(-3px);box-shadow:0 10px 24px var(--glow)}
+    .btn.o{background:none;border:1.5px solid var(--ink);color:var(--ink)}
+    .hero{padding:88px 0 70px;position:relative;overflow:hidden}
+    .hero .w{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:center}
+    .badge{display:inline-flex;gap:10px;align-items:center;border:1px solid var(--line);background:var(--panel);padding:7px 16px;border-radius:99px;font-size:.88rem;color:var(--mut)}
+    .badge b{width:8px;height:8px;border-radius:50%;background:#2fcf6e;animation:pulse 1.8s infinite}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(47,207,110,.6)}100%{box-shadow:0 0 0 10px rgba(47,207,110,0)}}
+    h1{font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.04;font-weight:800;margin:24px 0 0}
+    h1 span{display:inline-block;opacity:0;transform:translateY(40px) rotate(3deg);animation:rise .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i)*.07s + .1s)}
+    h1 .g{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    @keyframes rise{to{opacity:1;transform:none}}
+    .sub{max-width:54ch;color:var(--mut);font-size:1.1rem;margin:24px 0 0;animation:fade 1s .9s both}
+    @keyframes fade{from{opacity:0}}
+    .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px;animation:fade 1s 1.1s both}
+    .typed{margin-top:22px;font-weight:700;color:var(--acc2);min-height:1.6em}
+    .typed::after{content:'|';animation:blink 1s steps(1) infinite;color:var(--acc)}
+    @keyframes blink{50%{opacity:0}}
+    .phones{position:relative;height:430px;animation:fade 1s .5s both}
+    .ph{position:absolute;width:190px;height:390px;border-radius:30px;border:2px solid var(--ink);background:var(--panel);padding:14px;overflow:hidden;box-shadow:0 30px 60px var(--glow)}
+    .ph.a{left:0;top:20px;animation:float 6s ease-in-out infinite}.ph.b{left:110px;top:0;animation:float 6s -3s ease-in-out infinite;border-color:var(--acc)}
+    @keyframes float{50%{transform:translateY(-14px)}}
+    .ph::before{content:'';display:block;width:50px;height:5px;border-radius:9px;background:var(--line);margin:0 auto 14px}
+    .ph div{height:42px;border-radius:10px;margin-bottom:10px;background:linear-gradient(90deg,var(--line) 30%,var(--glow) 50%,var(--line) 70%);background-size:300% 100%;animation:shim 2.4s linear infinite}
+    .ph div.t{height:90px;background-color:var(--acc2);opacity:.85;animation:none;background-image:none}
+    .ph.b div.t{background-color:var(--acc)}
+    @keyframes shim{to{background-position:-300% 0}}
+    section{padding:84px 0;border-top:1px solid var(--line)}
+    .sh{margin-bottom:40px}.sh h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800}.sh p{color:var(--mut);margin:8px 0 0;max-width:60ch}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:-10px}
+    .st{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--acc2);border-radius:12px;padding:22px;text-align:center}
+    .st b{display:block;font:800 2.2rem 'Bricolage Grotesque';color:var(--acc2)}.st small{color:var(--mut)}
+    .ab{display:grid;grid-template-columns:1.2fr 1fr;gap:48px}
+    .ab p{color:var(--mut);margin:0 0 16px}
+    .ab ul{padding:0;margin:20px 0 0;list-style:none;display:grid;gap:10px}
+    .ab li{padding-left:26px;position:relative}.ab li::before{content:'';position:absolute;left:0;top:.55em;width:12px;height:2px;background:var(--acc)}
+    .sk{display:grid;gap:18px}
+    .sk h3{font-size:1rem;margin-bottom:8px}
+    .tags{display:flex;flex-wrap:wrap;gap:8px}
+    .tag{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:5px 12px;font-size:.87rem;transition:.2s}
+    .tag:hover{border-color:var(--acc);color:var(--acc);transform:translateY(-2px)}
+    .tl{position:relative;padding-left:34px}
+    .tl::before,.tl::after{content:'';position:absolute;left:6px;top:4px;width:2px;background:var(--line);bottom:4px}
+    .tl::after{background:linear-gradient(var(--acc),var(--acc2));height:var(--p,0%);bottom:auto;transition:height .1s}
+    .it{position:relative;padding-bottom:42px}.it:last-child{padding-bottom:0}
+    .it::before{content:'';position:absolute;left:-34px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--acc)}
+    .it.now::before{background:var(--acc);animation:pulse 1.8s infinite}
+    .d{color:var(--acc);font-weight:700;font-size:.9rem}
+    .it h3{font-size:1.35rem;margin:4px 0}.co{color:var(--mut);margin-bottom:10px}
+    .it ul{margin:0;padding-left:18px;color:var(--mut)}.it li{margin-bottom:6px}
+    .kt{margin-top:14px;font-size:.85rem;background:var(--panel);border-left:3px solid var(--acc);padding:10px 14px;border-radius:0 8px 8px 0;color:var(--mut)}
+    .pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+    .pc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:12px;transition:transform .25s,border-color .25s,box-shadow .25s}
+    .pc:hover{transform:translateY(-6px);border-color:var(--acc);box-shadow:0 18px 36px var(--glow)}
+    .ic{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;color:#fff;font:800 1rem 'Bricolage Grotesque';transition:transform .3s}
+    .pc:hover .ic{transform:rotate(-8deg) scale(1.1)}
+    .pc h3{font-size:1.1rem}.pc p{margin:0;color:var(--mut);font-size:.92rem;flex-grow:1}
+    .pc a,.pc em{border-top:1px solid var(--line);padding-top:12px;font-size:.88rem;font-weight:700;color:var(--acc);text-decoration:none;font-style:normal}
+    .pc em{color:var(--mut);font-weight:400}
+    .eg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .ec{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px}
+    .ec .y{color:var(--acc);font-weight:700;font-size:.88rem}.ec h3{font-size:1.05rem;margin:4px 0}.ec p{margin:0;color:var(--mut);font-size:.92rem}
+    .ec.big{border-top:3px solid var(--acc2)}
+    .val{margin-top:34px;padding:34px;border-radius:16px;background:linear-gradient(135deg,#0E2238,#1F5C99);color:#fff;font:italic 500 1.12rem/1.6 'DM Sans';position:relative;overflow:hidden}
+    .val::after{content:'';position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(#ff9a3d66,transparent 70%)}
+    .val small{display:block;margin-top:14px;font-style:normal;font-weight:700;opacity:.85;font-size:.88rem}
+    .cg{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+    .cg h2{font-size:clamp(2rem,5vw,3rem);font-weight:800;line-height:1.1}
+    .cl{display:grid;gap:4px}
+    .cl a,.cl button{display:flex;gap:14px;text-decoration:none;padding:14px 0;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;width:100%;transition:.2s}
+    .cl a:hover,.cl button:hover{color:var(--acc);padding-left:8px}
+    .cl span{color:var(--mut);width:84px;flex-shrink:0;font-size:.88rem}
+    footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:.86rem}
+    footer .w{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+    .rv{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}.rv.in{opacity:1;transform:none}
+    @media (max-width:860px){.hero .w,.ab,.cg{grid-template-columns:1fr}.phones{display:none}.stats{grid-template-columns:1fr 1fr}.eg{grid-template-columns:1fr}}
+    @media (max-width:720px){.menu{display:block}.links{position:fixed;top:calc(64px + env(safe-area-inset-top,0px));left:0;right:0;flex-direction:column;background:var(--bg);padding:20px 24px;border-bottom:1px solid var(--line);transform:translateY(-140%);transition:transform .25s;gap:16px}.links.open{transform:none}}
+    :focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}h1 span,.rv,.sub,.cta,.phones{opacity:1!important;transform:none!important}}
+  </style>
 </head>
 <body>
+<div id="bar"></div>
+<header><nav class="w">
+  <a class="brand" href="#top">Adnan Ameen<i>.</i></a>
+  <div class="links" id="links"><a href="#about">About</a><a href="#skills">Skills</a><a href="#agentic">Agentic coding</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#education">Education</a><a href="#contact">Contact</a></div>
+  <div class="tools"><button class="ib" id="theme" aria-label="Toggle theme">◐</button><button class="ib menu" id="mb" aria-label="Menu">☰</button></div>
+</nav></header>
 
-<header>
-  <nav class="wrap">
-    <div class="brand">Adnan Ameen<span>.</span></div>
-    <div class="navlinks" id="navlinks">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <a class="nav-cta" href="mailto:adnanameen4772@gmail.com">Say hello</a>
-    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-  </nav>
-</header>
-
-<section class="hero" style="border-top:none;">
-  <div class="wrap">
-    <div class="kicker"><span class="dot"></span> Currently building at Velzosoft, Multan</div>
-    <h1>Flutter developer who ships apps people actually keep on their phone.</h1>
-    <p class="hero-sub">I'm Muhammad Adnan Ameen — four years into building cross-platform apps in Dart and Flutter, from Play Store consumer products to backend-integrated enterprise tools.</p>
-    <div class="hero-meta">
-      <span class="pill">Multan, Pakistan</span>
-      <span class="pill">7+ shipped apps</span>
-      <span class="pill">Bloc · Riverpod · GetX</span>
-      <span class="pill">Firebase · Node.js · MongoDB</span>
-    </div>
-    <div class="hero-actions">
-      <a class="btn-primary" href="#projects">See the work</a>
-      <a class="btn-secondary" href="#contact">Get in touch</a>
-    </div>
-  </div>
-  <svg class="hero-graphic" width="260" height="360" viewBox="0 0 260 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="30" y="10" width="130" height="260" rx="22" stroke="#423CE0" stroke-width="1.5" opacity="0.5"/>
-    <rect x="100" y="90" width="130" height="260" rx="22" stroke="#14151B" stroke-width="1.5" opacity="0.18"/>
-    <circle cx="95" cy="30" r="3" fill="#423CE0" opacity="0.5"/>
-  </svg>
-</section>
-
-<section id="about">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>About</h2>
-      <span class="section-num">01</span>
-    </div>
-    <div class="about-grid">
-      <div>
-        <p>I build cross-platform mobile apps end to end — UI that matches design files pixel for pixel, state management that doesn't fall over as an app grows, and the API, Firebase, and backend wiring that makes an app actually work.</p>
-        <p>My work spans Quran and prayer utilities, on-demand video calling, e-commerce with 3D size-matching, event discovery, missing-persons alerts, and music tools — mostly built in small teams where I owned the Flutter side start to finish.</p>
-        <p>Outside of client work, I studied Computer Science at Air University, and I still spend time on data structures and problem-solving as the foundation under the app work.</p>
-      </div>
-      <div>
-        <div class="skill-block">
-          <h3>Flutter & state</h3>
-          <div class="tag-row">
-            <span class="tag">Dart</span><span class="tag">Flutter</span><span class="tag">Bloc</span>
-            <span class="tag">Riverpod</span><span class="tag">Provider</span><span class="tag">GetX</span>
-          </div>
-        </div>
-        <div class="skill-block">
-          <h3>Storage & routing</h3>
-          <div class="tag-row">
-            <span class="tag">Isar DB</span><span class="tag">Hive</span><span class="tag">Sqflite</span>
-            <span class="tag">Go Router</span><span class="tag">Material Routing</span>
-          </div>
-        </div>
-        <div class="skill-block">
-          <h3>Backend & integrations</h3>
-          <div class="tag-row">
-            <span class="tag">Firebase</span><span class="tag">REST APIs</span><span class="tag">Node.js</span>
-            <span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">Agora</span>
-            <span class="tag">Google Maps</span><span class="tag">Stripe</span><span class="tag">PayPal</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="experience">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Experience</h2>
-      <span class="section-num">02</span>
-    </div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-date">Feb 2025 — Present</div>
-        <div class="tl-role">Senior Flutter Developer</div>
-        <div class="tl-company">Velzosoft</div>
-        <ul><li>Leading Flutter development on the team's current app work.</li></ul>
-      </div>
-      <div class="tl-item">
-        <div class="tl-date">Aug 2023 — Oct 2024</div>
-        <div class="tl-role">Flutter Developer</div>
-        <div class="tl-company">Sparko Sol</div>
-        <ul>
-          <li>Built Al Sila, PlusOne, and 911 Missing Org, integrating REST APIs, Firebase, and other backend services.</li>
-          <li>Added live audio and video calling with Agora.</li>
-          <li>Handled local persistence with Isar DB, Hive, Sqflite, and Shared Preferences.</li>
-          <li>Implemented routing with Go Router, GetX, and Material routing across apps.</li>
-        </ul>
-      </div>
-      <div class="tl-item">
-        <div class="tl-date">Jul 2022 — Jul 2023</div>
-        <div class="tl-role">Flutter Developer</div>
-        <div class="tl-company">Akodes IT Solutions</div>
-        <ul>
-          <li>Built Bonsify, FitsRight, and Yulo, integrating APIs, Firebase, and backend services.</li>
-          <li>Added Google Maps and payment gateways — Stripe, PayPal, and in-app purchases.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Projects</h2>
-      <span class="section-num">03</span>
-    </div>
-    <div class="project-grid">
-
-      <div class="project-card">
-        <div class="app-icon" style="background:#2E7D5B;">AS</div>
-        <h3>Al Sila</h3>
-        <p>Quran reading and listening app with Azkar, prayer timings, and Qibla direction built in.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.incubasys.Alsila" target="_blank" rel="noopener">View on Play Store</a>
-      </div>
-
-      <div class="project-card">
-        <div class="app-icon" style="background:#C25B3E;">FR</div>
-        <h3>FitsRight</h3>
-        <p>Shopping app that uses 3D body-scan data to recommend accurate clothing sizes and cut down on returns.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.fitsright.app" target="_blank" rel="noopener">View on Play Store</a>
-      </div>
-
-      <div class="project-card">
-        <div class="app-icon" style="background:#423CE0;">YL</div>
-        <h3>Yulo</h3>
-        <p>Video storytelling app with dynamic transitions and customizable themes for sharing personal or fictional stories.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.yuloapp.apps" target="_blank" rel="noopener">View on Play Store</a>
-      </div>
-
-      <div class="project-card">
-        <div class="app-icon" style="background:#B8862E;">BN</div>
-        <h3>Bonsify</h3>
-        <p>Event discovery and management app with local recommendations, social interaction, and live host rooms.</p>
-        <span class="no-link">Client build</span>
-      </div>
-
-      <div class="project-card">
-        <div class="app-icon" style="background:#A13E5C;">911</div>
-        <h3>911 Missing Org</h3>
-        <p>Community-driven app for quickly reporting and spreading word about missing persons.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.nullanon.missing" target="_blank" rel="noopener">View on Play Store</a>
-      </div>
-
-      <div class="project-card">
-        <div class="app-icon" style="background:#2D6B8A;">MG</div>
-        <h3>Maglick — Play Music Unlimited</h3>
-        <p>Music player for organizing and playing personal audio libraries, playlists, and genres.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.maglickcoretech.maglickplaymusicunlimited" target="_blank" rel="noopener">View on Play Store</a>
-      </div>
-
-      <div class="project-card">
-        <div class="app-icon" style="background:#5B4636;">MSR</div>
-        <h3>Maglick Sound Recorder</h3>
-        <p>Recorder for lectures, meetings, and voice notes, with organizing and management tools built in.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.maglickcoretech.maglicksoundrecorder" target="_blank" rel="noopener">View on Play Store</a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="education">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Education</h2>
-      <span class="section-num">04</span>
-    </div>
-    <div class="edu-row">
-      <h3>Air University</h3>
-      <span>2018 — 2022</span>
-    </div>
-    <div class="edu-sub">Bachelor of Science in Computer Science</div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="wrap contact-grid">
+<main id="top">
+  <div class="hero"><div class="w">
     <div>
-      <h2>Let's build something that ships.</h2>
-      <p style="color:var(--muted); margin-top:18px; max-width:38ch;">Open to Flutter roles, freelance builds, and app ideas that need someone to own the mobile side end to end.</p>
+      <span class="badge"><b></b>Senior Flutter Developer at Velzosoft, Multan</span>
+      <h1 id="h"></h1>
+      <div class="typed" id="typed"></div>
+      <p class="sub">I'm Muhammad Adnan Ameen. With 4+ years in mobile engineering, I build pixel-perfect Flutter and native Android apps, and I take them from code to a live release on Google Play and the App Store.</p>
+      <div class="cta"><a class="btn" href="#projects">See my apps</a><a class="btn o" href="#contact">Get in touch</a></div>
     </div>
-    <div class="contact-list">
-      <a href="mailto:adnanameen4772@gmail.com"><span class="label">Email</span> adnanameen4772@gmail.com</a>
-      <a href="tel:+923057316536"><span class="label">Phone</span> +92 305 7316536</a>
-      <a href="https://www.linkedin.com/in/muhammad-adnan-ameen-686a77215/" target="_blank" rel="noopener"><span class="label">LinkedIn</span> muhammad-adnan-ameen</a>
-      <a href="https://github.com/Dani4772" target="_blank" rel="noopener"><span class="label">GitHub</span> Dani4772</a>
-      <a href="#"><span class="label">Location</span> Gulgusht Colony, Multan</a>
-    </div>
-  </div>
-</section>
+    <div class="phones" aria-hidden="true"><div class="ph a"><div class="t"></div><div></div><div></div><div></div><div></div><div></div></div><div class="ph b"><div class="t"></div><div></div><div></div><div></div><div></div><div></div></div></div>
+  </div></div>
 
-<footer class="wrap">
-  <span>© 2026 Muhammad Adnan Ameen</span>
-  <span>Built with Flutter in mind.</span>
-</footer>
+  <div class="w"><div class="stats rv">
+    <div class="st"><b data-n="4" data-s="+">0</b><small>Years of mobile experience</small></div>
+    <div class="st"><b data-n="10" data-s="+">0</b><small>Live apps shipped</small></div>
+    <div class="st"><b data-n="3" data-s="+">0</b><small>Years in Flutter and Dart</small></div>
+    <div class="st"><b data-n="2" data-s="">0</b><small>Stores published to</small></div>
+  </div></div>
+
+  <section id="about"><div class="w ab">
+    <div class="rv"><div class="sh"><h2>About me</h2></div>
+      <p>I'm a mobile app engineer with 4+ years of experience building, publishing, and maintaining cross-platform and native Android apps. That includes 3+ years of Flutter and Dart in production and 1+ year of hands-on native Android work in Kotlin and Java.</p>
+      <p>My apps span religious and lifestyle tools, e-commerce, social, media, and community safety. I turn Figma designs into polished UI, wire up the APIs and Firebase behind it, and handle the release process myself.</p>
+      <p>I work with clients, designers, backend developers, and QA to refine requirements, and I use AI-assisted tools like Claude Code, Cursor, Codex, and Augment Code to move faster on features, debugging, and code review.</p>
+      <ul>
+        <li>Sign, version, and publish apps to Google Play Console and App Store Connect, including TestFlight rollouts</li>
+        <li>Set up CI/CD pipelines with GitHub Actions</li>
+        <li>Bridge native Kotlin and Java features into Flutter with platform channels</li>
+        <li>Build real-time audio and video calling with the Agora SDK</li>
+      </ul></div>
+    <div class="rv"><div class="sh"><h2>Core stack</h2></div>
+      <div class="sk">
+        <div><h3>Flutter and state</h3><div class="tags"><span class="tag">Dart</span><span class="tag">Flutter</span><span class="tag">Bloc</span><span class="tag">Riverpod</span><span class="tag">Provider</span><span class="tag">GetX</span><span class="tag">MVVM</span></div></div>
+        <div><h3>Native Android</h3><div class="tags"><span class="tag">Kotlin</span><span class="tag">Java</span><span class="tag">Android SDK</span><span class="tag">Jetpack</span><span class="tag">RecyclerView</span><span class="tag">Platform channels</span></div></div>
+      </div></div>
+  </div></section>
+
+  <section id="skills"><div class="w">
+    <div class="sh rv"><h2>Full technical skills</h2><p>The tools I use to design, build, ship, and maintain mobile apps.</p></div>
+    <div class="pg rv">
+      <div class="pc"><h3>Local storage and data</h3><div class="tags"><span class="tag">Isar DB</span><span class="tag">Hive</span><span class="tag">Sqflite</span><span class="tag">Shared Preferences</span><span class="tag">JSON</span><span class="tag">Data structures</span></div></div>
+      <div class="pc"><h3>Navigation</h3><div class="tags"><span class="tag">Go Router</span><span class="tag">GetX routing</span><span class="tag">Material routing</span></div></div>
+      <div class="pc"><h3>Backend and cloud</h3><div class="tags"><span class="tag">Firebase Auth</span><span class="tag">Firestore</span><span class="tag">Cloud Messaging</span><span class="tag">Functions</span><span class="tag">Crashlytics</span><span class="tag">REST APIs</span><span class="tag">Node.js</span><span class="tag">MongoDB</span><span class="tag">Express.js</span></div></div>
+      <div class="pc"><h3>Integrations</h3><div class="tags"><span class="tag">Agora audio/video</span><span class="tag">Google Maps</span><span class="tag">Stripe</span><span class="tag">PayPal</span><span class="tag">In-App Purchase</span></div></div>
+      <div class="pc"><h3>Publishing and CI/CD</h3><div class="tags"><span class="tag">Google Play Console</span><span class="tag">App Store Connect</span><span class="tag">TestFlight</span><span class="tag">Signing and provisioning</span><span class="tag">GitHub Actions</span></div></div>
+      <div class="pc"><h3>Workflow</h3><div class="tags"><span class="tag">Git and GitHub</span><span class="tag">Figma-to-code</span><span class="tag">Agile collaboration</span></div></div>
+    </div></div></section>
+
+  <section id="agentic"><div class="w">
+    <div class="sh rv"><h2>Agentic coding</h2><p>I use AI coding agents every day to build features faster, debug, and review code, while I stay responsible for architecture and quality.</p></div>
+    <div class="pg rv">
+      <div class="pc"><div class="ic" style="background:#D9680F">CC</div><h3>Claude Code</h3><p>Feature development, debugging, and code review.</p></div>
+      <div class="pc"><div class="ic" style="background:#1F5C99">CU</div><h3>Cursor</h3><p>AI-assisted editing and refactoring across Flutter codebases.</p></div>
+      <div class="pc"><div class="ic" style="background:#2E7D5B">CX</div><h3>Codex</h3><p>Faster iteration on features and fixes.</p></div>
+      <div class="pc"><div class="ic" style="background:#7A4FB5">AG</div><h3>Augment Code</h3><p>Codebase-aware assistance for larger projects.</p></div>
+    </div></div></section>
+
+  <section id="experience"><div class="w">
+    <div class="sh rv"><h2>Experience</h2><p>Three teams, one thread: shipping production apps end to end.</p></div>
+    <div class="tl" id="tl">
+      <div class="it now rv"><div class="d">February 2025 to present</div><h3>Senior Flutter App Developer</h3><div class="co">Velzosoft, Crafting Digital Experience</div>
+        <ul><li>Own feature architecture, code quality, and delivery timelines for client mobile apps.</li><li>Build responsive, pixel-perfect Flutter UI from client requirements and Figma designs.</li><li>Manage state and business logic with modern Flutter patterns for scalable, maintainable code.</li><li>Prepare release builds and coordinate versioning, signing, and Play Store and App Store submission.</li><li>Configure and maintain CI/CD pipelines to automate builds, testing, and release distribution.</li><li>Use Claude Code, Cursor, Codex, and Augment Code to speed up development and code review.</li><li>Work directly with clients, designers, and backend teams to refine requirements.</li></ul>
+        <div class="kt">Flutter, Dart, Firebase, REST APIs, Git, State management, Figma-to-code, Play Console, CI/CD, Claude Code, Cursor</div></div>
+      <div class="it rv"><div class="d">August 2023 to October 2024</div><h3>Flutter Developer</h3><div class="co">Sparko Sol</div>
+        <ul><li>Worked on published apps including Al Sila, PlusOne, and 911 Missing Org.</li><li>Added real-time audio and video calling with the Agora SDK.</li><li>Built local-first data layers with Isar DB, Hive, Sqflite, and Shared Preferences for offline use.</li><li>Implemented Go Router, GetX routing, and Material routing across different codebases.</li><li>Integrated REST APIs and Firebase for authentication, content delivery, and push notifications.</li><li>Helped with Play Store listings, app signing, and release rollouts.</li></ul>
+        <div class="kt">Flutter, Dart, Agora SDK, Isar DB, Hive, Sqflite, Go Router, GetX, Firebase, REST APIs</div></div>
+      <div class="it rv"><div class="d">July 2022 to July 2023</div><h3>Flutter Developer, native Android foundation</h3><div class="co">Akodes IT Solutions</div>
+        <ul><li>Started by building native Android features in Kotlin and Java: Activity and Fragment lifecycles, Jetpack components, native UI.</li><li>Moved into Flutter and contributed to Bonsify, FitsRight, and Yulo.</li><li>Added Google Maps and payment gateways: Stripe, PayPal, and In-App Purchase.</li><li>Integrated REST APIs and Firebase (Auth, Firestore) across native and Flutter modules.</li><li>Bridged native Android features into Flutter with platform channels.</li></ul>
+        <div class="kt">Kotlin, Java, Android SDK, Flutter, Dart, Firebase, Google Maps, Stripe, PayPal, REST APIs</div></div>
+    </div></div></section>
+
+  <section id="projects"><div class="w">
+    <div class="sh rv"><h2>Projects</h2><p>Live apps across lifestyle, e-commerce, social, safety, and media.</p></div>
+    <div class="pg rv">
+      <div class="pc"><div class="ic" style="background:#2E7D5B">AS</div><h3>Al Sila</h3><p>Quran reading and listening app with Azkar, prayer timings, and Qibla direction, plus audio playback and offline persistence.</p><a href="https://play.google.com/store/apps/details?id=com.incubasys.Alsila" target="_blank" rel="noopener">View on Play Store</a></div>
+      <div class="pc"><div class="ic" style="background:#C25B3E">FR</div><h3>FitsRight</h3><p>E-commerce sizing app that uses 3D body-scan data to recommend accurate clothing sizes and cut return rates.</p><a href="https://play.google.com/store/apps/details?id=com.fitsright.app" target="_blank" rel="noopener">View on Play Store</a></div>
+      <div class="pc"><div class="ic" style="background:#423CE0">YL</div><h3>Yulo</h3><p>Video storytelling app with dynamic transitions, customizable themes, and a simple content-creation flow.</p><a href="https://play.google.com/store/apps/details?id=com.yuloapp.apps" target="_blank" rel="noopener">View on Play Store</a></div>
+      <div class="pc"><div class="ic" style="background:#B8862E">BN</div><h3>Bonsify</h3><p>Event management app for finding local events, restaurants, and hotels, with social interaction and live host rooms.</p><em>Client build</em></div>
+      <div class="pc"><div class="ic" style="background:#A13E5C">911</div><h3>911 Missing Org</h3><p>Community-safety app for rapid mass messaging and awareness campaigns that help locate missing persons.</p><a href="https://play.google.com/store/apps/details?id=com.nullanon.missing" target="_blank" rel="noopener">View on Play Store</a></div>
+      <div class="pc"><div class="ic" style="background:#2D6B8A">PO</div><h3>PlusOne</h3><p>Community and social app with real-time audio and video calling built on the Agora SDK.</p><em>Client build</em></div>
+      <div class="pc"><div class="ic" style="background:#3F5F8F">MG</div><h3>Maglick Play Music Unlimited</h3><p>Music player for organizing and playing personal audio libraries, playlists, and genres.</p><a href="https://play.google.com/store/apps/details?id=com.maglickcoretech.maglickplaymusicunlimited" target="_blank" rel="noopener">View on Play Store</a></div>
+      <div class="pc"><div class="ic" style="background:#5B4636">MSR</div><h3>Maglick Sound Recorder</h3><p>Recorder for lectures, meetings, and voice notes, with tools to organize and manage recordings.</p><a href="https://play.google.com/store/apps/details?id=com.maglickcoretech.maglicksoundrecorder" target="_blank" rel="noopener">View on Play Store</a></div>
+      <div class="pc"><div class="ic" style="background:#0F8A8A">MC</div><h3>Medco Cleaning Services</h3><p>Customer-facing app for Medco's cleaning services, published on Google Play by MedcoFM.</p><a href="https://play.google.com/store/apps/details?id=com.medcofm.userapp" target="_blank" rel="noopener">View on Play Store</a></div>
+      <div class="pc"><div class="ic" style="background:#2B7A4B">MS</div><h3>Medco Service Cleaner</h3><p>Companion app for the cleaners who deliver Medco's services, published on Google Play by MedcoFM.</p><a href="https://play.google.com/store/apps/details?id=com.medcofm.cleanerapp" target="_blank" rel="noopener">View on Play Store</a></div>
+    </div></div></section>
+
+  <section id="education"><div class="w">
+    <div class="sh rv"><h2>Education and languages</h2></div>
+    <div class="eg rv">
+      <div class="ec big"><div class="y">2018 to 2022</div><h3>BS Computer Science</h3><p>Air University. CGPA 3.0.</p></div>
+      <div class="ec"><div class="y">2016 to 2018</div><h3>FSc Pre-Engineering</h3><p>Iqra College, Shujabad. Grade A.</p></div>
+      <div class="ec"><div class="y">2014 to 2016</div><h3>Matriculation, Science</h3><p>Govt. High School, Shujabad. Grade A.</p></div>
+      <div class="ec"><h3>English</h3><p>Working professional proficiency.</p></div>
+      <div class="ec"><h3>Urdu</h3><p>Native.</p></div>
+      <div class="ec"><h3>Interests</h3><p>New Flutter and Android tools, coding challenges, cross-platform app design.</p></div>
+    </div>
+    <div class="val rv">"4+ years of mobile engineering combining native Android fundamentals in Kotlin and Java with 3+ years of dedicated Flutter expertise. I build pixel-perfect, cross-platform apps that integrate seamlessly with backend services, real-time communication, and payments, and I personally take them from code to a live release on both the Google Play Store and Apple App Store."<small>Open to Senior Flutter Developer, Mobile App Engineer, Flutter/Kotlin Hybrid, and Android and cross-platform roles.</small></div>
+  </div></section>
+
+  <section id="contact"><div class="w cg">
+    <div class="rv"><h2>Let's build your next app.</h2><p style="color:var(--mut);max-width:38ch;margin-top:16px">Open to full-time roles, freelance builds, and app ideas that need someone to own the mobile side end to end.</p></div>
+    <div class="cl rv">
+      <button id="copy"><span>Email</span><b id="cl">adnanameen4772@gmail.com</b></button>
+      <a href="tel:+923057316536"><span>Phone</span>+92 305 7316536</a>
+      <a href="https://www.linkedin.com/in/muhammad-adnan-ameen-686a77215/" target="_blank" rel="noopener"><span>LinkedIn</span>muhammad-adnan-ameen</a>
+      <a href="https://github.com/Dani4772" target="_blank" rel="noopener"><span>GitHub</span>Dani4772</a>
+      <a href="https://www.google.com/maps/search/Multan,+Pakistan" target="_blank" rel="noopener"><span>Location</span>Multan, Pakistan</a>
+    </div></div></section>
+</main>
+<footer><div class="w"><span>© 2026 Muhammad Adnan Ameen</span><span>Flutter · Kotlin · Java · Firebase</span></div></footer>
 
 <script>
-  const menuBtn = document.getElementById('menuBtn');
-  const navlinks = document.getElementById('navlinks');
-  menuBtn.addEventListener('click', () => navlinks.classList.toggle('open'));
-  navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navlinks.classList.remove('open')));
+  (function(){
+  var h=document.getElementById('h'),words=['Flutter','apps','people','keep','on','their','phone.'],i=0;
+  h.innerHTML=words.map(function(w,k){return '<span style="--i:'+k+'"'+(k==0?' class="g"':'')+'>'+w+'</span> '}).join('');
+  var T=['Flutter and Dart','Kotlin and Java for Android','Firebase and REST APIs','Play Store and App Store releases'],ti=0,ci=0,del=false,el=document.getElementById('typed');
+  function tick(){var s=T[ti];ci+=del?-1:1;el.textContent=s.slice(0,ci);var d=del?30:70;if(!del&&ci==s.length){del=true;d=1400}else if(del&&ci==0){del=false;ti=(ti+1)%T.length;d=300}setTimeout(tick,d)}tick();
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(n){io.observe(n)});
+  var co=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var n=e.target,t=+n.dataset.n,s=n.dataset.s,c=0,iv=setInterval(function(){c++;n.textContent=c+(c==t?s:'');if(c>=t)clearInterval(iv)},180);co.unobserve(n)})},{threshold:.6});
+  document.querySelectorAll('[data-n]').forEach(function(n){co.observe(n)});
+  var bar=document.getElementById('bar'),tl=document.getElementById('tl');
+  function sc(){var d=document.documentElement,p=d.scrollTop/(d.scrollHeight-d.clientHeight||1);bar.style.width=(p*100)+'%';var r=tl.getBoundingClientRect(),v=(innerHeight*.6-r.top)/r.height;tl.style.setProperty('--p',Math.max(0,Math.min(1,v))*100+'%')}
+  addEventListener('scroll',sc,{passive:true});sc();
+  var L=document.getElementById('links');document.getElementById('mb').onclick=function(){L.classList.toggle('open')};
+  L.querySelectorAll('a').forEach(function(a){a.onclick=function(){L.classList.remove('open')}});
+  document.getElementById('theme').onclick=function(){var r=document.documentElement,dark=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dark?'light':'dark'};
+  document.getElementById('copy').onclick=function(){var c=document.getElementById('cl'),m='adnanameen4772@gmail.com';try{navigator.clipboard.writeText(m).then(function(){c.textContent='Copied to clipboard';setTimeout(function(){c.textContent=m},1600)})}catch(e){location.href='mailto:'+m}};
+  })();
 </script>
-
 </body>
 </html>
