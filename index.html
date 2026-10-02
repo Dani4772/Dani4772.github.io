@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Muhammad Adnan Ameen — Senior Flutter Developer</title>
-  <meta name="description" content="Senior Flutter developer and mobile app engineer in Multan, Pakistan. Flutter, Kotlin, Java, Firebase. Apps published on Google Play and the App Store.">
+  <meta name="description" content="Senior Flutter developer and mobile app engineer in Multan, Pakistan. AI-assisted and agentic development with Claude Code, Cursor, Codex, and Augment Code. Flutter, Kotlin, Java, Firebase. Apps shipped to Google Play and the App Store.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -31,7 +31,7 @@
     .btn:hover{transform:translateY(-3px);box-shadow:0 10px 24px var(--glow)}
     .btn.o{background:none;border:1.5px solid var(--ink);color:var(--ink)}
     .hero{padding:88px 0 70px;position:relative;overflow:hidden}
-    .hero .w{display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:center}
+    .hero .w{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center}
     .badge{display:inline-flex;gap:10px;align-items:center;border:1px solid var(--line);background:var(--panel);padding:7px 16px;border-radius:99px;font-size:.88rem;color:var(--mut)}
     .badge b{width:8px;height:8px;border-radius:50%;background:#2fcf6e;animation:pulse 1.8s infinite}
     @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(47,207,110,.6)}100%{box-shadow:0 0 0 10px rgba(47,207,110,0)}}
@@ -45,21 +45,33 @@
     .typed{margin-top:22px;font-weight:700;color:var(--acc2);min-height:1.6em}
     .typed::after{content:'|';animation:blink 1s steps(1) infinite;color:var(--acc)}
     @keyframes blink{50%{opacity:0}}
-    .phones{position:relative;height:430px;animation:fade 1s .5s both}
-    .ph{position:absolute;width:190px;height:390px;border-radius:30px;border:2px solid var(--ink);background:var(--panel);padding:14px;overflow:hidden;box-shadow:0 30px 60px var(--glow)}
-    .ph.a{left:0;top:20px;animation:float 6s ease-in-out infinite}.ph.b{left:110px;top:0;animation:float 6s -3s ease-in-out infinite;border-color:var(--acc)}
+    .portrait{position:relative;margin:0;width:100%;max-width:390px;justify-self:center;animation:fade 1s .5s both}
+    .portrait .halo{position:absolute;inset:-18px;border-radius:38px;background:linear-gradient(135deg,var(--acc),var(--acc2) 65%,transparent);filter:blur(16px);opacity:.45;z-index:0}
+    .portrait .ring{position:absolute;inset:-11px;border-radius:33px;border:1px solid var(--line);z-index:1;pointer-events:none}
+    .shot{position:relative;z-index:2;display:block;width:100%;padding:0;overflow:hidden;border:1px solid var(--line);border-radius:26px;background:var(--panel);box-shadow:0 30px 60px var(--glow);aspect-ratio:4/3;animation:float 7s ease-in-out infinite}
     @keyframes float{50%{transform:translateY(-14px)}}
-    .ph::before{content:'';display:block;width:50px;height:5px;border-radius:9px;background:var(--line);margin:0 auto 14px}
-    .ph div{height:42px;border-radius:10px;margin-bottom:10px;background:linear-gradient(90deg,var(--line) 30%,var(--glow) 50%,var(--line) 70%);background-size:300% 100%;animation:shim 2.4s linear infinite}
-    .ph div.t{height:90px;background-color:var(--acc2);opacity:.85;animation:none;background-image:none}
-    .ph.b div.t{background-color:var(--acc)}
-    @keyframes shim{to{background-position:-300% 0}}
+    .shot img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+    .shot:hover img,.shot:focus-visible img{transform:scale(1.06)}
+    .shot::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(8,24,42,.42));pointer-events:none}
+    .zl{position:absolute;right:12px;bottom:12px;z-index:3;padding:6px 12px;border-radius:99px;background:rgba(8,24,42,.6);color:#fff;font-size:.78rem;font-weight:700;backdrop-filter:blur(6px);opacity:0;transform:translateY(6px);transition:.3s}
+    .shot:hover .zl,.shot:focus-visible .zl{opacity:1;transform:none}
+    .chips{position:absolute;z-index:4;left:50%;bottom:-26px;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:8px;width:max-content;max-width:106%}
+    .chip{display:flex;align-items:center;gap:8px;padding:9px 15px;border-radius:99px;background:var(--panel);border:1px solid var(--line);box-shadow:0 12px 26px var(--glow);font-size:.83rem;font-weight:700;white-space:nowrap}
+    .chip i{width:7px;height:7px;border-radius:50%;background:var(--acc);font-style:normal}
+    .chip.b{transform:translateY(15px)}.chip.b i{background:var(--acc2)}
+    .mframe{align-self:start;max-width:240px;padding:3px;border-radius:22px;background:linear-gradient(135deg,var(--acc),var(--acc2));box-shadow:0 18px 40px var(--glow)}
+    .mframe img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:19px;background:var(--panel)}
+    .lb{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:24px;background:rgba(6,14,24,.9);backdrop-filter:blur(8px)}
+    .lb[hidden]{display:none}
+    .lb img{width:auto;height:auto;max-width:min(1000px,100%);max-height:86vh;border-radius:18px;border:1px solid var(--line);box-shadow:0 40px 90px rgba(0,0,0,.6);animation:pop .35s cubic-bezier(.2,.8,.2,1)}
+    @keyframes pop{from{opacity:0;transform:scale(.94)}}
+    .lb button{position:absolute;top:16px;right:16px;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);font-size:1.3rem;line-height:1}
     section{padding:84px 0;border-top:1px solid var(--line)}
     .sh{margin-bottom:40px}.sh h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800}.sh p{color:var(--mut);margin:8px 0 0;max-width:60ch}
     .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:-10px}
     .st{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--acc2);border-radius:12px;padding:22px;text-align:center}
     .st b{display:block;font:800 2.2rem 'Bricolage Grotesque';color:var(--acc2)}.st small{color:var(--mut)}
-    .ab{display:grid;grid-template-columns:1.2fr 1fr;gap:48px}
+    .ab{display:grid;grid-template-columns:190px 1.2fr 1fr;gap:40px}
     .ab p{color:var(--mut);margin:0 0 16px}
     .ab ul{padding:0;margin:20px 0 0;list-style:none;display:grid;gap:10px}
     .ab li{padding-left:26px;position:relative}.ab li::before{content:'';position:absolute;left:0;top:.55em;width:12px;height:2px;background:var(--acc)}
@@ -102,10 +114,12 @@
     footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:.86rem}
     footer .w{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     .rv{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}.rv.in{opacity:1;transform:none}
-    @media (max-width:860px){.hero .w,.ab,.cg{grid-template-columns:1fr}.phones{display:none}.stats{grid-template-columns:1fr 1fr}.eg{grid-template-columns:1fr}}
+    @media (max-width:1040px){.ab{grid-template-columns:1fr}}
+    @media (max-width:560px){.typed{min-height:3.2em}}
+    @media (max-width:860px){.hero .w,.cg{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.eg{grid-template-columns:1fr}.chip.b{transform:none}}
     @media (max-width:720px){.menu{display:block}.links{position:fixed;top:calc(64px + env(safe-area-inset-top,0px));left:0;right:0;flex-direction:column;background:var(--bg);padding:20px 24px;border-bottom:1px solid var(--line);transform:translateY(-140%);transition:transform .25s;gap:16px}.links.open{transform:none}}
     :focus-visible{outline:2px solid var(--acc);outline-offset:3px}
-    @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}h1 span,.rv,.sub,.cta,.phones{opacity:1!important;transform:none!important}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}h1 span,.rv,.sub,.cta,.portrait{opacity:1!important;transform:none!important}}
   </style>
 </head>
 <body>
@@ -122,23 +136,31 @@
       <span class="badge"><b></b>Senior Flutter Developer at Velzosoft, Multan</span>
       <h1 id="h"></h1>
       <div class="typed" id="typed"></div>
-      <p class="sub">I'm Muhammad Adnan Ameen. With 4+ years in mobile engineering, I build pixel-perfect Flutter and native Android apps, and I take them from code to a live release on Google Play and the App Store.</p>
+      <p class="sub">I'm Muhammad Adnan Ameen, a Senior Flutter Developer at Velzosoft. With 4+ years in mobile engineering, I work agentically with Claude Code and Cursor to ship pixel-perfect Flutter and native Android apps faster, and I still take every one from code to a live release on Google Play and the App Store.</p>
       <div class="cta"><a class="btn" href="#projects">See my apps</a><a class="btn o" href="#contact">Get in touch</a></div>
     </div>
-    <div class="phones" aria-hidden="true"><div class="ph a"><div class="t"></div><div></div><div></div><div></div><div></div><div></div></div><div class="ph b"><div class="t"></div><div></div><div></div><div></div><div></div><div></div></div></div>
+    <figure class="portrait">
+      <span class="halo" aria-hidden="true"></span><span class="ring" aria-hidden="true"></span>
+      <button class="shot" id="shot" aria-label="View a larger photo of Adnan Ameen">
+        <img src="adnan.jpg" alt="Muhammad Adnan Ameen, Senior Flutter Developer" width="1000" height="750" decoding="async" fetchpriority="high">
+        <span class="zl">Enlarge</span>
+      </button>
+      <figcaption class="chips"><span class="chip"><i></i>4+ years in Flutter</span><span class="chip b"><i></i>10+ apps shipped</span></figcaption>
+    </figure>
   </div></div>
 
   <div class="w"><div class="stats rv">
     <div class="st"><b data-n="4" data-s="+">0</b><small>Years of mobile experience</small></div>
     <div class="st"><b data-n="10" data-s="+">0</b><small>Live apps shipped</small></div>
     <div class="st"><b data-n="3" data-s="+">0</b><small>Years in Flutter and Dart</small></div>
-    <div class="st"><b data-n="2" data-s="">0</b><small>Stores published to</small></div>
+    <div class="st"><b data-n="10" data-s="+">0</b><small>Stores published to</small></div>
   </div></div>
 
   <section id="about"><div class="w ab">
+    <div class="rv"><div class="mframe"><img src="adnan.jpg" alt="Portrait of Muhammad Adnan Ameen" width="1000" height="750" loading="lazy" decoding="async"></div></div>
     <div class="rv"><div class="sh"><h2>About me</h2></div>
       <p>I'm a mobile app engineer with 4+ years of experience building, publishing, and maintaining cross-platform and native Android apps. That includes 3+ years of Flutter and Dart in production and 1+ year of hands-on native Android work in Kotlin and Java.</p>
-      <p>My apps span religious and lifestyle tools, e-commerce, social, media, and community safety. I turn Figma designs into polished UI, wire up the APIs and Firebase behind it, and handle the release process myself.</p>
+      <p>My apps span religious and lifestyle tools, e-commerce, social, media, education, weather, and community safety. I turn Figma designs into polished UI, wire up the APIs and Firebase behind it, and handle the release process myself.</p>
       <p>I work with clients, designers, backend developers, and QA to refine requirements, and I use AI-assisted tools like Claude Code, Cursor, Codex, and Augment Code to move faster on features, debugging, and code review.</p>
       <ul>
         <li>Sign, version, and publish apps to Google Play Console and App Store Connect, including TestFlight rollouts</li>
@@ -190,9 +212,9 @@
   <section id="projects"><div class="w">
     <div class="sh rv"><h2>Projects</h2><p>Live apps across lifestyle, e-commerce, social, safety, and media.</p></div>
     <div class="pg rv">
-      <div class="pc"><div class="ic" style="background:#2E7D5B">AS</div><h3>Al Sila</h3><p>Quran reading and listening app with Azkar, prayer timings, and Qibla direction, plus audio playback and offline persistence.</p><a href="https://play.google.com/store/apps/details?id=com.incubasys.Alsila" target="_blank" rel="noopener">View on Play Store</a></div>
+      <div class="pc"><div class="ic" style="background:#2E7D5B">AS</div><h3>Al Sila</h3><p>Quran reading and listening app with Azkar, prayer timings, and Qibla direction, plus audio playback and offline persistence.</p><em>Client build</em></div>
       <div class="pc"><div class="ic" style="background:#C25B3E">FR</div><h3>FitsRight</h3><p>E-commerce sizing app that uses 3D body-scan data to recommend accurate clothing sizes and cut return rates.</p><a href="https://play.google.com/store/apps/details?id=com.fitsright.app" target="_blank" rel="noopener">View on Play Store</a></div>
-      <div class="pc"><div class="ic" style="background:#423CE0">YL</div><h3>Yulo</h3><p>Video storytelling app with dynamic transitions, customizable themes, and a simple content-creation flow.</p><a href="https://play.google.com/store/apps/details?id=com.yuloapp.apps" target="_blank" rel="noopener">View on Play Store</a></div>
+      <div class="pc"><div class="ic" style="background:#423CE0">YL</div><h3>Yulo</h3><p>Video storytelling app with dynamic transitions, customizable themes, and a simple content-creation flow.</p><em>Client build</em></div>
       <div class="pc"><div class="ic" style="background:#B8862E">BN</div><h3>Bonsify</h3><p>Event management app for finding local events, restaurants, and hotels, with social interaction and live host rooms.</p><em>Client build</em></div>
       <div class="pc"><div class="ic" style="background:#A13E5C">911</div><h3>911 Missing Org</h3><p>Community-safety app for rapid mass messaging and awareness campaigns that help locate missing persons.</p><a href="https://play.google.com/store/apps/details?id=com.nullanon.missing" target="_blank" rel="noopener">View on Play Store</a></div>
       <div class="pc"><div class="ic" style="background:#2D6B8A">PO</div><h3>PlusOne</h3><p>Community and social app with real-time audio and video calling built on the Agora SDK.</p><em>Client build</em></div>
@@ -200,6 +222,9 @@
       <div class="pc"><div class="ic" style="background:#5B4636">MSR</div><h3>Maglick Sound Recorder</h3><p>Recorder for lectures, meetings, and voice notes, with tools to organize and manage recordings.</p><a href="https://play.google.com/store/apps/details?id=com.maglickcoretech.maglicksoundrecorder" target="_blank" rel="noopener">View on Play Store</a></div>
       <div class="pc"><div class="ic" style="background:#0F8A8A">MC</div><h3>Medco Cleaning Services</h3><p>Customer-facing app for Medco's cleaning services, published on Google Play by MedcoFM.</p><a href="https://play.google.com/store/apps/details?id=com.medcofm.userapp" target="_blank" rel="noopener">View on Play Store</a></div>
       <div class="pc"><div class="ic" style="background:#2B7A4B">MS</div><h3>Medco Service Cleaner</h3><p>Companion app for the cleaners who deliver Medco's services, published on Google Play by MedcoFM.</p><a href="https://play.google.com/store/apps/details?id=com.medcofm.cleanerapp" target="_blank" rel="noopener">View on Play Store</a></div>
+      <div class="pc"><div class="ic" style="background:#7D2E8C">KC</div><h3>King of the Curve</h3><p>MCAT prep app with high-yield practice questions covering the topics most likely to show up on exam day.</p><a href="https://play.google.com/store/apps/details?id=com.kingofthecurve.kingofthecurve" target="_blank" rel="noopener">View on Play Store</a></div>
+      <div class="pc"><div class="ic" style="background:#33475B">VZ</div><h3>Vizzn</h3><p>Logistics and scheduling app for construction, manufacturing, paving, and landscaping crews, letting teams view their schedule, update activities, and track crews and equipment across job sites.</p><a href="https://play.google.com/store/apps/details?id=ca.codifyconsulting.vizzn" target="_blank" rel="noopener">View on Play Store</a></div>
+      <div class="pc"><div class="ic" style="background:#2E8BC0">WF</div><h3>Weather - Live Forecast</h3><p>Weather app with live current conditions, hourly and daily forecasts, severe weather alerts, and radar maps.</p><a href="https://play.google.com/store/apps/details?id=com.wind.rain.localweather.liveforecast" target="_blank" rel="noopener">View on Play Store</a></div>
     </div></div></section>
 
   <section id="education"><div class="w">
@@ -212,7 +237,7 @@
       <div class="ec"><h3>Urdu</h3><p>Native.</p></div>
       <div class="ec"><h3>Interests</h3><p>New Flutter and Android tools, coding challenges, cross-platform app design.</p></div>
     </div>
-    <div class="val rv">"4+ years of mobile engineering combining native Android fundamentals in Kotlin and Java with 3+ years of dedicated Flutter expertise. I build pixel-perfect, cross-platform apps that integrate seamlessly with backend services, real-time communication, and payments, and I personally take them from code to a live release on both the Google Play Store and Apple App Store."<small>Open to Senior Flutter Developer, Mobile App Engineer, Flutter/Kotlin Hybrid, and Android and cross-platform roles.</small></div>
+    <div class="val rv">"4+ years of mobile engineering combining native Android fundamentals in Kotlin and Java with 3+ years of dedicated Flutter expertise. I work agentically: Claude Code, Cursor, Codex, and Augment Code handle the heavy lifting on features, debugging, and review, while I own the architecture, the code quality, and the release. I build pixel-perfect, cross-platform apps that integrate seamlessly with backend services, real-time communication, and payments, and I personally take them from code to a live release on both the Google Play Store and Apple App Store."<small>Open to Senior Flutter Developer, Mobile App Engineer, Flutter/Kotlin Hybrid, and Android and cross-platform roles.</small></div>
   </div></section>
 
   <section id="contact"><div class="w cg">
@@ -227,11 +252,13 @@
 </main>
 <footer><div class="w"><span>© 2026 Muhammad Adnan Ameen</span><span>Flutter · Kotlin · Java · Firebase</span></div></footer>
 
+<div class="lb" id="lb" hidden><img id="lbi" data-src="adnan.png" alt="Muhammad Adnan Ameen, Senior Flutter Developer"><button id="lbx" aria-label="Close photo">&times;</button></div>
+
 <script>
   (function(){
-  var h=document.getElementById('h'),words=['Flutter','apps','people','keep','on','their','phone.'],i=0;
-  h.innerHTML=words.map(function(w,k){return '<span style="--i:'+k+'"'+(k==0?' class="g"':'')+'>'+w+'</span> '}).join('');
-  var T=['Flutter and Dart','Kotlin and Java for Android','Firebase and REST APIs','Play Store and App Store releases'],ti=0,ci=0,del=false,el=document.getElementById('typed');
+  var h=document.getElementById('h'),W=['Flutter','apps','people','keep,','built','with','AI','agents.'],G=[0,6];
+  h.innerHTML=W.map(function(w,k){return '<span style="--i:'+k+'"'+(G.indexOf(k)>-1?' class="g"':'')+'>'+w+'</span> '}).join('');
+  var T=['Agentic coding with Claude Code and Cursor','Flutter and Dart','Kotlin and Java for Android','Play Store and App Store releases'],ti=0,ci=0,del=false,el=document.getElementById('typed');
   function tick(){var s=T[ti];ci+=del?-1:1;el.textContent=s.slice(0,ci);var d=del?30:70;if(!del&&ci==s.length){del=true;d=1400}else if(del&&ci==0){del=false;ti=(ti+1)%T.length;d=300}setTimeout(tick,d)}tick();
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
   document.querySelectorAll('.rv').forEach(function(n){io.observe(n)});
@@ -244,6 +271,12 @@
   L.querySelectorAll('a').forEach(function(a){a.onclick=function(){L.classList.remove('open')}});
   document.getElementById('theme').onclick=function(){var r=document.documentElement,dark=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dark?'light':'dark'};
   document.getElementById('copy').onclick=function(){var c=document.getElementById('cl'),m='adnanameen4772@gmail.com';try{navigator.clipboard.writeText(m).then(function(){c.textContent='Copied to clipboard';setTimeout(function(){c.textContent=m},1600)})}catch(e){location.href='mailto:'+m}};
+  var lb=document.getElementById('lb'),shot=document.getElementById('shot'),lbi=document.getElementById('lbi');
+  function shut(){lb.hidden=true;document.body.style.overflow='';shot.focus()}
+  shot.onclick=function(){lbi.src=lbi.dataset.src;lb.hidden=false;document.body.style.overflow='hidden';document.getElementById('lbx').focus()};
+  document.getElementById('lbx').onclick=shut;
+  lb.onclick=function(e){if(e.target===lb||e.target.id==='lbi')shut()};
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden)shut()});
   })();
 </script>
 </body>
